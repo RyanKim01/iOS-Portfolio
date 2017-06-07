@@ -8,8 +8,10 @@ An iOS app which displays current weather and weather forecasts based on the giv
 Alamofire
 
 **I learned how to**:
-* send requests using Alamofire
 * align items using stack views
-* Receive JSOn through Alamofire and populate data on the views (i.e. UITableView)
+* Receive JSON through Alamofire and populate data on the views (i.e. UITableView)
 * Make custom UITableView Cell view
 * Format the date
+* Locate user's location using CoreLocation
+* Access permission to get user's location
+* Change App Transport Security Settings to allow requesting data from http (not https)

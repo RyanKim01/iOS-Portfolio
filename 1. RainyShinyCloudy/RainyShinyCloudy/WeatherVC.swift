@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherVC: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -19,17 +20,26 @@ class WeatherVC: UIViewController {
 
     var currentWeather: CurrentWeather!
     var forecast: Forecast!
-    var forecasts: [Forecast]!
+    var forecasts: [Forecast]! = []
+    var button =  UIButton(type: .custom)
+    
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startMonitoringSignificantLocationChanges()
+        
         //Setting UIButton on top of the navigation bar
-        let button =  UIButton(type: .custom)
+        
         button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("Button ▼", for: .normal)
-        button.addTarget(self, action: #selector(self.clickTitleOnNavigation), for: .touchDown)
+        button.setTitle("Change Location ▼", for: .normal)
+        button.addTarget(self, action: #selector(self.presentCitySelectionPage), for: .touchDown)
         let navItem = UINavigationItem(title: "SomeTitle");
         navigationBar.setItems([navItem], animated: false)
         navItem.titleView = button
@@ -40,28 +50,35 @@ class WeatherVC: UIViewController {
         
         currentWeather = CurrentWeather()
         forecast = Forecast(weatherDict: [:])
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         currentWeather.downloadWeatherDetails {
             self.forecast.downloadForecastsData { forecasts in
                 self.forecasts = forecasts
+                self.weatherTableView.reloadData()
                 self.updateMainUI()
             }
-            
         }
-        
-
     }
 
-    func clickTitleOnNavigation(button: UIButton) {
-        print("clicked")
-    }
     
     func updateMainUI() {
         dateLabel.text = currentWeather.date
         currentTempLabel.text = "\(currentWeather.currentTemp)"
         currentWeatherTypeLabel.text = currentWeather.weatherType
         locationLabel.text = currentWeather.cityName
+        button.setTitle("\(currentWeather.cityName) ▼", for: .normal)
         currentWeatherImage.image = UIImage(named: currentWeather.weatherType)
     }
+    
+    func presentCitySelectionPage() {
+        let citySelectionVC = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "citySelectionVC") as! CitySelectionVC
+        self.present(citySelectionVC, animated:true, completion:nil)
+    }
+    
 }
 
 extension WeatherVC: UITableViewDelegate, UITableViewDataSource {
@@ -70,12 +87,22 @@ extension WeatherVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return forecasts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath)
-        
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? WeatherCell {
+            let forecast = forecasts[indexPath.row]
+            cell.configureCell(forecast: forecast)
+            
+            return cell
+
+        } else {
+            return WeatherCell()
+        }
     }
+}
+
+extension WeatherVC: CLLocationManagerDelegate {
+    
 }

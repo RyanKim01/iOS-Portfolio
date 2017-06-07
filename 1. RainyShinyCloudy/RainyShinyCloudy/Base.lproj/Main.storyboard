@@ -64,7 +64,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CXT-O1-iI6">
                                         <rect key="frame" x="178.5" y="67" width="121.5" height="155"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vay-7p-hWk">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vay-7p-hWk">
                                                 <rect key="frame" x="1" y="0.0" width="120" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="THE-Fu-l7w"/>
@@ -97,14 +97,14 @@
                                 <rect key="frame" x="0.0" y="312" width="320" height="256"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="weatherCell" rowHeight="80" id="kCR-jm-mJn">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="weatherCell" rowHeight="80" id="kCR-jm-mJn" customClass="WeatherCell" customModule="RainyShinyCloudy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kCR-jm-mJn" id="7GT-vp-BkB">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cgS-dE-ppT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cgS-dE-ppT">
                                                     <rect key="frame" x="18" y="14" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="QT2-Q9-O8u"/>
@@ -162,6 +162,13 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="dayLabel" destination="tHZ-QC-Lks" id="Btx-R2-wed"/>
+                                            <outlet property="highTemp" destination="CZX-wK-FkB" id="Lvf-g7-FH2"/>
+                                            <outlet property="lowTemp" destination="g8h-sh-igo" id="UPK-cx-mJB"/>
+                                            <outlet property="weatherIcon" destination="cgS-dE-ppT" id="nn4-d9-trC"/>
+                                            <outlet property="weatherType" destination="IZd-d2-jPw" id="HtK-rC-qHX"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -193,6 +200,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133.59999999999999" y="138.0809595202399"/>
+        </scene>
+        <!--City SelectionVC-->
+        <scene sceneID="iey-sb-to8">
+            <objects>
+                <viewController storyboardIdentifier="citySelectionVC" id="6iV-as-EcY" customClass="CitySelectionVC" customModule="RainyShinyCloudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="flp-09-IZX"/>
+                        <viewControllerLayoutGuide type="bottom" id="IF5-qo-ZEu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2EV-66-bDE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxD-2q-EAK">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Select City" id="wbH-HB-0X8">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="vAp-Fh-byU">
+                                            <connections>
+                                                <action selector="closeBarButtonPressed:" destination="6iV-as-EcY" id="YAt-Xa-Q4v"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WZT-ek-hQz">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cityCell" rowHeight="82" id="5Il-gb-idJ" customClass="CityCell" customModule="RainyShinyCloudy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="82"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Il-gb-idJ" id="arp-Tr-fw9">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="81.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oS-3c-k1E">
+                                                    <rect key="frame" x="13" y="21" width="294" height="41"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="30"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8oS-3c-k1E" secondAttribute="trailing" constant="5" id="4ji-I6-agU"/>
+                                                <constraint firstItem="8oS-3c-k1E" firstAttribute="centerY" secondItem="arp-Tr-fw9" secondAttribute="centerY" id="U4b-Jw-jmj"/>
+                                                <constraint firstItem="8oS-3c-k1E" firstAttribute="leading" secondItem="arp-Tr-fw9" secondAttribute="leadingMargin" constant="5" id="hmL-a1-Jzu"/>
+                                                <constraint firstItem="8oS-3c-k1E" firstAttribute="centerX" secondItem="arp-Tr-fw9" secondAttribute="centerX" id="pky-CY-k1I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="cityNameLabel" destination="8oS-3c-k1E" id="hGU-B9-LXD"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="WZT-ek-hQz" secondAttribute="trailing" id="8n4-jf-0RR"/>
+                            <constraint firstItem="WZT-ek-hQz" firstAttribute="top" secondItem="mxD-2q-EAK" secondAttribute="bottom" id="9ck-dc-u8j"/>
+                            <constraint firstItem="WZT-ek-hQz" firstAttribute="top" secondItem="mxD-2q-EAK" secondAttribute="bottom" id="Fiz-DN-TVb"/>
+                            <constraint firstItem="mxD-2q-EAK" firstAttribute="leading" secondItem="2EV-66-bDE" secondAttribute="leading" id="HqU-N1-Ftt"/>
+                            <constraint firstItem="WZT-ek-hQz" firstAttribute="leading" secondItem="2EV-66-bDE" secondAttribute="leading" id="Qpw-T9-SvN"/>
+                            <constraint firstAttribute="trailing" secondItem="mxD-2q-EAK" secondAttribute="trailing" id="epd-ry-Xng"/>
+                            <constraint firstItem="mxD-2q-EAK" firstAttribute="top" secondItem="flp-09-IZX" secondAttribute="bottom" id="ou9-rE-q7d"/>
+                            <constraint firstItem="IF5-qo-ZEu" firstAttribute="top" secondItem="WZT-ek-hQz" secondAttribute="bottom" id="z5M-fT-hqf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cityTableView" destination="WZT-ek-hQz" id="aG2-YK-dSA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ES6-8a-c6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980.625" y="140.49295774647888"/>
         </scene>
     </scenes>
 </document>

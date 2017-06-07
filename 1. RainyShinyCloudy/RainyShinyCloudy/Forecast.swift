@@ -107,6 +107,8 @@ class Forecast {
                         let forcast = Forecast.init(weatherDict: item)
                         forecasts.append(forcast)
                     }
+                    //Getting rid of today's forecast since it's already shown  
+                    forecasts.remove(at: 0)
                     print(forecasts)
                 }
             }
