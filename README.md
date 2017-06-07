@@ -15,3 +15,11 @@ Alamofire
 * Locate user's location using CoreLocation
 * Access permission to get user's location
 * Change App Transport Security Settings to allow requesting data from http (not https)
+
+### 2. RainyShinyCloud:
+**One Liner**:
+
+
+**3rd Party Library Used**:
+
+**I learned how to**:
