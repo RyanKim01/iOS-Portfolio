@@ -7,19 +7,20 @@ An iOS app which displays current weather and weather forecasts based on the giv
 **3rd Party Library Used**:
 Alamofire
 
-**I learned how to**:
-* align items using stack views
-* Receive JSON through Alamofire and populate data on the views (i.e. UITableView)
-* Make custom UITableView Cell view
+**Objectives**:
+* Align items using stack views
+* Send requests to OpenWeatherMap's Public REST API to Receive data in format of JSON through Alamofire and populate data on the views (i.e. UITableView)
+* Make custom UITableViewCell view
 * Format the date
 * Locate user's location using CoreLocation
-* Access permission to get user's location
+* Ask for permission to access user's location
 * Change App Transport Security Settings to allow requesting data from http (not https)
 
 ### 2. RainyShinyCloud:
 **One Liner**:
-
+An app lets you discover 718 different
 
 **3rd Party Library Used**:
 
-**I learned how to**:
+**Objectives**:
+* Add custom font
