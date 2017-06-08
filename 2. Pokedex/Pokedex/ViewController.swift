@@ -15,7 +15,16 @@ class ViewController: UIViewController {
 
     var pokemons = [Pokemon]()
     var filteredPokemon = [Pokemon]()
-    var inSearchMode = false
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(gesture:)))
+    var inSearchMode = false {
+        didSet {
+            if inSearchMode {
+                self.view.addGestureRecognizer(tapGesture)
+            } else {
+                self.view.removeGestureRecognizer(tapGesture)
+            }
+        }
+    }
     var musicPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -26,8 +35,8 @@ class ViewController: UIViewController {
         
         searchBar.returnKeyType = .done
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap(gesture:)))
-        self.view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap(gesture:)))
+//        self.view.addGestureRecognizer(tapGesture)
         
         parsePokemonCSV()
         initAudio()
@@ -78,10 +87,21 @@ class ViewController: UIViewController {
             sender.alpha = 1.0
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonDetailVC" {
+            if let detailsVC = segue.destination as? PokemonDetailVC {
+                if let passedPokemon = sender as? Pokemon {
+                    detailsVC.passedPokemon = passedPokemon
+                }
+            }
+        }
+    }
+    
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokeCell", for: indexPath) as? PokeCell {
             let pokemon: Pokemon!
@@ -100,7 +120,15 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedPokemon: Pokemon!
         
+        if inSearchMode {
+            selectedPokemon = filteredPokemon[indexPath.row]
+        } else {
+            selectedPokemon = pokemons[indexPath.row]
+        }
+        
+        performSegue(withIdentifier: "PokemonDetailVC", sender: selectedPokemon)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -119,6 +147,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 105, height: 105)
     }
+    
 }
 
 extension ViewController: UISearchBarDelegate {
