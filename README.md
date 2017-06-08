@@ -23,4 +23,6 @@ An app lets you discover 718 different
 **3rd Party Library Used**:
 
 **Objectives**:
-* Add custom font
+* Add custom font and background music
+* Implement custom collection views to present 718 different pokemons
+* Implement search function to filter pokemons out
