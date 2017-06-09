@@ -35,9 +35,6 @@ class ViewController: UIViewController {
         
         searchBar.returnKeyType = .done
         
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tap(gesture:)))
-//        self.view.addGestureRecognizer(tapGesture)
-        
         parsePokemonCSV()
         initAudio()
     }

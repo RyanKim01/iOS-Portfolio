@@ -18,11 +18,13 @@ Alamofire
 
 ### 2. RainyShinyCloud:
 **One Liner**:
-An app lets you discover 718 different
+An app lets you discover 718 different pokemons with detailed information like type, defense, height, etc.
 
 **3rd Party Library Used**:
+* Alamofire
 
 **Objectives**:
 * Add custom font and background music
 * Implement custom collection views to present 718 different pokemons
 * Implement search function to filter pokemons out
+* Implement StackView to alight items on the view

@@ -156,7 +156,7 @@
                         <viewControllerLayoutGuide type="top" id="Kd4-3y-5Ki"/>
                         <viewControllerLayoutGuide type="bottom" id="bm6-T7-nef"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="l3e-yp-p0h" customClass="PokeCell" customModule="Pokedex" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="l3e-yp-p0h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -181,7 +181,7 @@
                                         </constraints>
                                         <state key="normal" image="back"/>
                                         <connections>
-                                            <action selector="backButtonPressed:" destination="0fD-Pg-MJZ" eventType="touchUpInside" id="xyT-pw-2QU"/>
+                                            <action selector="backButtonPressed:" destination="0fD-Pg-MJZ" eventType="touchUpInside" id="cKr-QW-RZd"/>
                                         </connections>
                                     </button>
                                 </subviews>

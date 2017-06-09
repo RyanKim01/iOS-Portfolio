@@ -26,14 +26,21 @@ class PokemonDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = passedPokemon.name
-
+        nameLabel.text = passedPokemon.name.capitalized
+        passedPokemon.downloadPokemonDetail { 
+            self.updateUI()
+        }
     }
-    
-    @IBAction func backButtonPressed(_ sender: Any) {
+
+    @IBAction func backButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 
-
-
+    func updateUI() {
+        attackLabel.text = passedPokemon.attack
+        defenseLabel.text = passedPokemon.defense
+        weightLabel.text = passedPokemon.weight
+        heightLabel.text = passedPokemon.height
+        nameLabel.text = passedPokemon.name
+    }
 }
