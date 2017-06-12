@@ -16,15 +16,16 @@ class ViewController: UIViewController {
     var pokemons = [Pokemon]()
     var filteredPokemon = [Pokemon]()
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap(gesture:)))
-    var inSearchMode = false {
-        didSet {
-            if inSearchMode {
-                self.view.addGestureRecognizer(tapGesture)
-            } else {
-                self.view.removeGestureRecognizer(tapGesture)
-            }
-        }
-    }
+    var inSearchMode = false
+//    {
+//        didSet {
+//            if inSearchMode {
+//                self.view.addGestureRecognizer(tapGesture)
+//            } else {
+//                self.view.removeGestureRecognizer(tapGesture)
+//            }
+//        }
+//    }
     var musicPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {

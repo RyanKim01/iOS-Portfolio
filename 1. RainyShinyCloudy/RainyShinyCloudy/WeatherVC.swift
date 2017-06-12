@@ -22,6 +22,7 @@ class WeatherVC: UIViewController {
     var forecast: Forecast!
     var forecasts: [Forecast]! = []
     var button =  UIButton(type: .custom)
+    private let refreshControl = UIRefreshControl()
     
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
@@ -44,6 +45,16 @@ class WeatherVC: UIViewController {
         navigationBar.setItems([navItem], animated: false)
         navItem.titleView = button
         
+        //Adding refresh control to the tableview
+        if #available(iOS 10.0, *) {
+            weatherTableView.refreshControl = refreshControl
+        } else {
+            weatherTableView.addSubview(refreshControl)
+        }
+        // Configure Refresh Control
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Weather Data ...", attributes: [NSFontAttributeName : UIFont(name: "HelveticaNeue-Bold", size: 12.0)!, NSForegroundColorAttributeName :  UIColor(red: 115/255, green: 182/255, blue: 255/255, alpha: 1)])
+       
         //Setting the UITableView delegate & datasource setup
         weatherTableView.delegate = self
         weatherTableView.dataSource = self
@@ -77,6 +88,17 @@ class WeatherVC: UIViewController {
     func presentCitySelectionPage() {
         let citySelectionVC = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "citySelectionVC") as! CitySelectionVC
         self.present(citySelectionVC, animated:true, completion:nil)
+    }
+    
+    func refreshData() {
+        currentWeather.downloadWeatherDetails {
+            self.forecast.downloadForecastsData { forecasts in
+                self.forecasts = forecasts
+                self.weatherTableView.reloadData()
+                self.updateMainUI()
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
     
 }

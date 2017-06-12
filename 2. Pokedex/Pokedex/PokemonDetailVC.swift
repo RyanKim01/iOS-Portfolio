@@ -27,6 +27,12 @@ class PokemonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = passedPokemon.name.capitalized
+        
+        let img = UIImage(named: "\(passedPokemon.pokedexID)")
+        mainImage.image = img
+        currentEvoImage.image = img
+        pokeDexIdLabel.text = "\(passedPokemon.pokedexID)"
+        
         passedPokemon.downloadPokemonDetail { 
             self.updateUI()
         }
@@ -41,6 +47,19 @@ class PokemonDetailVC: UIViewController {
         defenseLabel.text = passedPokemon.defense
         weightLabel.text = passedPokemon.weight
         heightLabel.text = passedPokemon.height
-        nameLabel.text = passedPokemon.name
+        typeLabel.text = passedPokemon.type
+        descriptionLabel.text = passedPokemon.description
+        
+        if passedPokemon.nextEvolutionId == "" {
+            evoLabel.text = "No Evolutions"
+            nextEvoImage.isHidden = true
+        } else {
+            nextEvoImage.isHidden = false
+            nextEvoImage.image = UIImage(named: "\(passedPokemon.nextEvolutionId)")
+            let evolutionText = "Next Evolution: \(passedPokemon.nextEvolutionName) - LVL \(passedPokemon.nextEvolutionLevel)"
+            evoLabel.text = evolutionText
+        }
+        
+        
     }
 }

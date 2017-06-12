@@ -19,6 +19,7 @@ struct APPURL {
     }
     
     static let BaseURL = Domain.Pokemon + Routes.Api + Routes.PokemonUrl
+    static let domainURL = Domain.Pokemon
 }
 
 typealias DownloadComplete = () -> ()
