@@ -1,5 +1,5 @@
 //
-//  ItemType+CoreDataClass.swift
+//  Image+CoreDataClass.swift
 //  DreamLister
 //
 //  Created by Ryan Kim on 6/13/17.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(ItemType)
-public class ItemType: NSManagedObject {
+//@objc(Image)
+public class Image: NSManagedObject {
 
 }

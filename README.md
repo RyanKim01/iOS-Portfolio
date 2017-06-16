@@ -29,8 +29,8 @@ An app lets you discover 718 different pokemons with detailed information like t
 * Implement search function to filter pokemons out
 * Implement StackView to alight items on the view
 
-### 2. DreamLister:
-**One Liner**:
+### 3. DreamLister:
+**One Liner**: DreamLister lets you keep the track of goods you want to buy as a reminder
 
 **3rd Party Library Used**:
 
@@ -38,3 +38,4 @@ An app lets you discover 718 different pokemons with detailed information like t
 **Objectives**:
 * Persist data using Apple's Core Data framework
 * Fully understand Core Data framework
+* Use UITableView to populate data from Core Data
