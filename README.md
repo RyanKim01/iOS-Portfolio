@@ -36,6 +36,7 @@ An app lets you discover 718 different pokemons with detailed information like t
 
 
 **Objectives**:
-* Persist data using Apple's Core Data framework
-* Fully understand Core Data framework
+* Create/Delete/Update/Persist objects using Core Data
 * Use UITableView to populate data from Core Data
+* Access user's imagePicker and let the user to upload cropped image in the app
+* Swipe UITableViewCell to perform extra actions like "Delete"

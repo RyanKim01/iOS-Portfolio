@@ -29,13 +29,35 @@ class MainVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func attemptFetch() {
-        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+    func attemptFetch() -> [Item]? {
+        var fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+//        var typeFetchRequest: NSFetchRequest<ItemType> = ItemType.fetchRequest()
+        
         let dateSort = NSSortDescriptor(key: "createdAt", ascending: false)
-        fetchRequest.sortDescriptors = [dateSort]
+        let priceSort = NSSortDescriptor(key: "price", ascending: true)
+        let titleSort = NSSortDescriptor(key: "title", ascending: true)
+        let typeSort = NSSortDescriptor(key: "toItemType.type", ascending: true)
+
+        switch itemSegment.selectedSegmentIndex {
+        case 0:
+            fetchRequest.sortDescriptors = [dateSort]
+            break
+        case 1:
+            fetchRequest.sortDescriptors = [priceSort]
+            break
+        case 2:
+            fetchRequest.sortDescriptors = [titleSort]
+            break
+        case 3:
+            fetchRequest.sortDescriptors = [typeSort]
+            break
+        default:
+            break
+        }
+        
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        
+        controller.delegate = self
         fetchedResultsController = controller
         
         do {
@@ -44,6 +66,10 @@ class MainVC: UIViewController {
             let error = error as NSError
             print("\(error)")
         }
+        
+        let fetchedItems = controller.fetchedObjects
+        return fetchedItems
+ 
     }
     
     func configrueCell(cell: ItemCell, indexPath: NSIndexPath) {
@@ -68,6 +94,26 @@ class MainVC: UIViewController {
         item3.details = "Vrum vrum!"
         
         ad.saveContext()
+    }
+    
+    @IBAction func segmentChange(_ sender: Any) {
+//        if (sender as AnyObject).selectedSegmentIndex == 3 {
+//            
+//        } else {
+//            
+//        }
+        attemptFetch()
+        itemTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ItemDetailsVC" {
+            if let destination = segue.destination as? ItemDetailsVC {
+                if let item = sender as? Item {
+                    destination.itemToEdit = item
+                }
+            }
+        }
     }
 }
 
@@ -95,6 +141,34 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let objs = fetchedResultsController.fetchedObjects, objs.count > 0 {
+            let item = objs[indexPath.row]
+            performSegue(withIdentifier: "ItemDetailsVC", sender: item)
+        }
+    }
+    
+    //2 protocols added to enable swipable action
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .normal, title: "Delete") { action, index in
+            let fectchedItems = self.attemptFetch()
+            if let fectchedItems = fectchedItems {
+                context.delete((fectchedItems[indexPath.row]))
+                ad.saveContext()
+                print("Successfully deleted an item")
+            } else {
+                 print("No fetched data")
+            }
+        }
+        delete.backgroundColor = .red
+        
+        return [delete]
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }
 
