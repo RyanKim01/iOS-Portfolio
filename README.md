@@ -40,3 +40,4 @@ An app lets you discover 718 different pokemons with detailed information like t
 * Use UITableView to populate data from Core Data
 * Access user's imagePicker and let the user to upload cropped image in the app
 * Swipe UITableViewCell to perform extra actions like "Delete"
+* Use UserDefaults to track user's status (i.e. whether the user viewed the certain page, whether the user launched the app, etc)

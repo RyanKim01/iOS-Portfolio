@@ -41,31 +41,17 @@ class ItemDetailsVC: UIViewController {
         if itemToEdit != nil {
             loadItemData()
         }
+
+        picker.reloadAllComponents()
     }
     
     func getStores() {
         let fetchRequest: NSFetchRequest<Store> = Store.fetchRequest()
         do {
             stores = try context.fetch(fetchRequest)
-            if stores.count == 0 {
-                let store = Store(context: context)
-                store.name = "Best Buy"
-                let store2 = Store(context: context)
-                store2.name = "Tesla Dealership"
-                let store3 = Store(context: context)
-                store3.name = "Frys Electronics"
-                let store4 = Store(context: context)
-                store4.name = "Target"
-                let store5 = Store(context: context)
-                store5.name = "Amazon"
-                let store6 = Store(context: context)
-                store6.name = "H K Mart"
-        
-                ad.saveContext()
-            }
-            picker.reloadAllComponents()
         } catch {
             //error handling
+            print("error")
         }
     }
     
@@ -73,19 +59,6 @@ class ItemDetailsVC: UIViewController {
         let fetchRequest: NSFetchRequest<ItemType> = ItemType.fetchRequest()
         do {
             itemTypes = try context.fetch(fetchRequest)
-            if itemTypes.count == 0 {
-                let itemType = ItemType(context: context)
-                itemType.type = "Electronics"
-                let itemType2 = ItemType(context: context)
-                itemType2.type = "Toy"
-                let itemType3 = ItemType(context: context)
-                itemType3.type = "Car"
-                let itemType4 = ItemType(context: context)
-                itemType4.type = "Tool"
-                
-                ad.saveContext()
-            }
-            picker.reloadAllComponents()
         } catch {
         
         }
@@ -136,9 +109,7 @@ class ItemDetailsVC: UIViewController {
     @IBAction func savePressed(_ sender: Any) {
         var item: Item!
         let picture = Image(context: context)
-        let itemType = ItemType(context: context)
-        
-        itemType.type = itemTypes[picker.selectedRow(inComponent: 1)].type
+
         picture.image = thumbImage.image
         
         
@@ -148,7 +119,6 @@ class ItemDetailsVC: UIViewController {
             item = itemToEdit
         }
         
-        item.toItemType = itemType
         item.toImage = picture
         
         if let title = titleField.text {
@@ -165,6 +135,7 @@ class ItemDetailsVC: UIViewController {
         item.createdAt = NSDate()
 
         item.toStore = stores[picker.selectedRow(inComponent: 0)]
+        item.toItemType = itemTypes[picker.selectedRow(inComponent: 1)]
         ad.saveContext()
         navigationController?.popViewController(animated: true)
     }
@@ -207,20 +178,16 @@ extension ItemDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
         if component == 0 {
             let store = stores[row]
             return store.name
-        } else if component == 1 {
-            let itemType = itemTypes[row]
-            return itemType.type
         }
-        return ""
+        let itemType = itemTypes[row]
+        return itemType.type
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return stores.count
-        } else if component == 1 {
-            return itemTypes.count
         }
-        return 0
+        return itemTypes.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

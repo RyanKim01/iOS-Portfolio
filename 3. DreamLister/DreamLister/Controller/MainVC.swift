@@ -20,7 +20,7 @@ class MainVC: UIViewController {
         itemTableView.delegate = self
         itemTableView.dataSource = self
         
-//        generateTestData()
+        hasLaunchedYet()
         attemptFetch()
     }
 
@@ -30,8 +30,7 @@ class MainVC: UIViewController {
     }
 
     func attemptFetch() -> [Item]? {
-        var fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-//        var typeFetchRequest: NSFetchRequest<ItemType> = ItemType.fetchRequest()
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         
         let dateSort = NSSortDescriptor(key: "createdAt", ascending: false)
         let priceSort = NSSortDescriptor(key: "price", ascending: true)
@@ -72,36 +71,67 @@ class MainVC: UIViewController {
  
     }
     
+    func hasLaunchedYet() {
+        let hasLaunchedKey = "HasLaunched"
+        let defaults = UserDefaults.standard
+        let hasLaunched = defaults.bool(forKey: hasLaunchedKey)
+        
+        if !hasLaunched {
+            generateTestData()
+            defaults.set(true, forKey: hasLaunchedKey)
+        }
+    }
+    
     func configrueCell(cell: ItemCell, indexPath: NSIndexPath) {
         let item = fetchedResultsController.object(at: indexPath as IndexPath)
         cell.configureCell(item: item)
     }
     
     func generateTestData() {
+        let itemType = ItemType(context: context)
+        itemType.type = "Electronics"
+        let itemType2 = ItemType(context: context)
+        itemType2.type = "Toy"
+        let itemType3 = ItemType(context: context)
+        itemType3.type = "Car"
+        let itemType4 = ItemType(context: context)
+        itemType4.type = "Tool"
+        
         let item = Item(context: context)
         item.title = "Macbook Pro"
         item.price = 1800
         item.details = "New Macbook Proc coming soon in 2 months! Hope to buy it soon."
+        item.toItemType = itemType
         
         let item2 = Item(context: context)
         item2.title = "Bose Headphone"
         item2.price = 300
-        item2.details = "Headphone yo"
-        
+        item2.details = "The best headphone ever"
+        item2.toItemType = itemType
+
         let item3 = Item(context: context)
         item3.title = "Ferarri"
         item3.price = 200000
         item3.details = "Vrum vrum!"
+        item3.toItemType = itemType3
+        
+        let store = Store(context: context)
+        store.name = "Best Buy"
+        let store2 = Store(context: context)
+        store2.name = "Tesla Dealership"
+        let store3 = Store(context: context)
+        store3.name = "Frys Electronics"
+        let store4 = Store(context: context)
+        store4.name = "Target"
+        let store5 = Store(context: context)
+        store5.name = "Amazon"
+        let store6 = Store(context: context)
+        store6.name = "H K Mart"
         
         ad.saveContext()
     }
     
     @IBAction func segmentChange(_ sender: Any) {
-//        if (sender as AnyObject).selectedSegmentIndex == 3 {
-//            
-//        } else {
-//            
-//        }
         attemptFetch()
         itemTableView.reloadData()
     }
