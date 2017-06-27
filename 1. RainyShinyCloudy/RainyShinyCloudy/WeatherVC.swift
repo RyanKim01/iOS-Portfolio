@@ -29,7 +29,7 @@ class WeatherVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customActivityIndicatory(self.view)
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -66,11 +66,13 @@ class WeatherVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        customActivityIndicatory(self.view)
         currentWeather.downloadWeatherDetails {
             self.forecast.downloadForecastsData { forecasts in
                 self.forecasts = forecasts
                 self.weatherTableView.reloadData()
                 self.updateMainUI()
+                customActivityIndicatory(self.view, startAnimate: false)
             }
         }
     }
