@@ -11,13 +11,16 @@ import SwiftPhoenixClient
 
 class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var msgTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textFieldStackView: UIStackView!
 
     let socket = Socket(domainAndPort: "afternoon-sands-51684.herokuapp.com", path: "socket", transport: "websocket", prot: "https", params: [:])
     var topic: String? = "lobby"
-    var messages: [UserMessage] = [UserMessage(body: "Lorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: true)]
-    
+    var messages: [UserMessage] = [UserMessage(body: "Lorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: true), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: true)]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
@@ -25,12 +28,37 @@ class ViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.register(TextBubbleCell.self, forCellWithReuseIdentifier: "TextBubbleCell")
         
+        establishSocketConnection()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: .UIKeyboardWillHide, object: nil)
+    }
+
+    func handleKeyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+
+            let isKeyboardShowing = notification.name == .UIKeyboardWillShow
+            
+            bottomConstraint.constant = isKeyboardShowing ? (keyboardFrame?.height)! : 0
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: { 
+                self.view.layoutIfNeeded()
+            }, completion: { (completed) in
+                if isKeyboardShowing {
+                    self.scrollCollectionViewToBottom()
+                }
+            })
+        }
+    }
+    
+    func establishSocketConnection() {
         socket.join(topic: topic!, message: Message(subject: "status", body: "joining")) { channel in
             let chan = channel as! Channel
             
-//            chan.on(event: "join") { message in
-//                self.chatWindow.text = "You joined the room.\n"
-//            }
+            //            chan.on(event: "join") { message in
+            //                self.chatWindow.text = "You joined the room.\n"
+            //            }
             
             chan.on(event: "new_message") { message in
                 guard let convertedMessage = message as? Message,
@@ -42,32 +70,57 @@ class ViewController: UIViewController {
                 let newMessage = "[\(username)]:\n \(body)"
                 self.messages.append(UserMessage(body: "\(newMessage)", isSender: false))
                 self.collectionView.reloadData()
+                self.scrollCollectionViewToBottom()
                 
-                let section = self.collectionView.numberOfSections - 1
-                let item = self.collectionView.numberOfItems(inSection: 0) - 1
-                let lastIndexPath = NSIndexPath(item: item, section: section) as IndexPath
-                self.collectionView.scrollToItem(at: lastIndexPath , at: UICollectionViewScrollPosition.bottom, animated: true)
-
             }
             
-//            chan.on(event: "user:entered") { message in
-//                let username = "anonymous"
-//                self.chatWindow.text = self.chatWindow.text.appending("[\(username) entered]\n")
-//            }
+            //            chan.on(event: "user:entered") { message in
+            //                let username = "anonymous"
+            //                self.chatWindow.text = self.chatWindow.text.appending("[\(username) entered]\n")
+            //            }
             
-//            chan.on(event: "error") { message in
-//                guard let message = message as? Message,
-//                    let body = message["body"] else {
-//                        return
-//                }
-//                let newMessage = "[ERROR] \(body)\n"
-//                let updatedText = self.chatWindow.text.appending(newMessage)
-//                self.chatWindow.text = updatedText
-//            }
+            //            chan.on(event: "error") { message in
+            //                guard let message = message as? Message,
+            //                    let body = message["body"] else {
+            //                        return
+            //                }
+            //                let newMessage = "[ERROR] \(body)\n"
+            //                let updatedText = self.chatWindow.text.appending(newMessage)
+            //                self.chatWindow.text = updatedText
+            //            }
         }
     }
+    
+    func setupViews() {
+        let topborderView = UIView()
+        topborderView.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        textFieldStackView.addConstraintsWithFormat("H:|[v0]|", views: topborderView)
+        textFieldStackView.addConstraintsWithFormat("V:|[v0(0.5)]", views: topborderView)
+    }
+    
+    func scrollCollectionViewToBottom() {
+        let lastIndexPath = NSIndexPath(item: (self.messages.count - 1), section: 0) as IndexPath
+        self.collectionView.scrollToItem(at: lastIndexPath , at: UICollectionViewScrollPosition.bottom, animated: true)
+    }
 
+    @IBAction func sendButtonPressed(_ sender: Any) {
+        if let msg = msgTextField.text, let username = usernameTextField.text {
+            let message = Message(message: ["user": username, "body": msg])
+            let payload = Payload(topic: topic!, event: "new_message", message: message)
+            socket.send(data: payload)
+            msgTextField.text = ""
+            
+            let newMessage = "\(username): \(msg)"
+            self.messages.append(UserMessage(body: "\(newMessage)", isSender: true))
+            self.collectionView.reloadData()
+            self.scrollCollectionViewToBottom()
+        }
+        
+//        print(message.toJsonString())
+        
 
+        
+    }
 
 
 }
@@ -99,10 +152,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.bubbleImageView.tintColor = UIColor(white: 0.90, alpha: 1)
             cell.messageTextView.textColor = UIColor.black
         }
-        
-        
-        
-
             return cell
     }
     
@@ -122,6 +171,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(8, 0, 0, 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        msgTextField.endEditing(true)
+        usernameTextField.endEditing(true)
+        
     }
     
     func calculateHeight(indexPath: IndexPath) -> CGRect {

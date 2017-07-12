@@ -15,6 +15,7 @@
 		2750CFCB1F126B47000331E8 /* ChatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2750CFC91F126B47000331E8 /* ChatApp.xcdatamodeld */; };
 		2750CFCD1F126B47000331E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2750CFCC1F126B47000331E8 /* Assets.xcassets */; };
 		2750CFD01F126B47000331E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2750CFCE1F126B47000331E8 /* LaunchScreen.storyboard */; };
+		2759B2251F164F9B00701BC7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2759B2241F164F9B00701BC7 /* User.swift */; };
 		61F67DF7F80E9EF9E8D7310C /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E913FDE4A376E618974E7675 /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		2750CFCC1F126B47000331E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2750CFCF1F126B47000331E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2750CFD11F126B47000331E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2759B2241F164F9B00701BC7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		42959A03C132D521F59F4B7B /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E913FDE4A376E618974E7675 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				2749755C1F152024005FE5A1 /* UserMessage.swift */,
+				2759B2241F164F9B00701BC7 /* User.swift */,
 			);
 			name = Model;
 			path = ChatApp/Model;
@@ -249,6 +252,7 @@
 			files = (
 				2749755B1F14EB2E005FE5A1 /* TextBubbleCell.swift in Sources */,
 				2750CFCB1F126B47000331E8 /* ChatApp.xcdatamodeld in Sources */,
+				2759B2251F164F9B00701BC7 /* User.swift in Sources */,
 				2749755D1F152024005FE5A1 /* UserMessage.swift in Sources */,
 				2750CFC51F126B47000331E8 /* ViewController.swift in Sources */,
 				2750CFC31F126B47000331E8 /* AppDelegate.swift in Sources */,

@@ -22,22 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Send a msg.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w54-lF-JA4">
-                                <rect key="frame" x="24" y="629" width="287" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wrt-Kq-I8s">
+                                <rect key="frame" x="24" y="619" width="327" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" placeholder="Send a msg.." textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="w54-lF-JA4">
+                                        <rect key="frame" x="0.0" y="0.0" width="271" height="40"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-tq-djq">
+                                        <rect key="frame" x="291" y="0.0" width="36" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="s1f-Lf-aLz"/>
+                                        </constraints>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="sendButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K7N-SO-JOw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Nzv-SL-Ikm"/>
+                                    <constraint firstAttribute="height" constant="40" id="caw-lU-SNn"/>
                                 </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-tq-djq">
-                                <rect key="frame" x="331" y="629" width="36" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="s1f-Lf-aLz"/>
-                                </constraints>
-                                <state key="normal" title="Send"/>
-                            </button>
+                            </stackView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write your username here.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XfP-KY-wkM">
                                 <rect key="frame" x="16" y="20" width="343" height="30"/>
                                 <nil key="textColor"/>
@@ -45,7 +53,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HXo-Us-lTU">
-                                <rect key="frame" x="0.0" y="70" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="541"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="syK-Tn-U5H">
                                     <size key="itemSize" width="128" height="79"/>
@@ -69,22 +77,23 @@
                         <constraints>
                             <constraint firstItem="XfP-KY-wkM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0EI-Ha-K8V"/>
                             <constraint firstAttribute="trailing" secondItem="HXo-Us-lTU" secondAttribute="trailing" id="151-k8-rTr"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="w54-lF-JA4" secondAttribute="bottom" constant="8" id="FmO-5z-ReA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wrt-Kq-I8s" secondAttribute="bottom" constant="8" id="2HV-FH-7NF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wrt-Kq-I8s" secondAttribute="trailing" constant="8" id="P2s-or-rAv"/>
+                            <constraint firstItem="wrt-Kq-I8s" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="PUw-C4-D2Z"/>
+                            <constraint firstItem="wrt-Kq-I8s" firstAttribute="top" secondItem="HXo-Us-lTU" secondAttribute="bottom" constant="8" id="TGY-Gt-fPj"/>
                             <constraint firstItem="HXo-Us-lTU" firstAttribute="top" secondItem="XfP-KY-wkM" secondAttribute="bottom" constant="20" id="TLa-FJ-pHF"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6vd-tq-djq" secondAttribute="bottom" constant="8" id="TcZ-y5-gXw"/>
                             <constraint firstItem="HXo-Us-lTU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="g17-Qy-1w9"/>
                             <constraint firstItem="XfP-KY-wkM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lBE-T4-j77"/>
-                            <constraint firstItem="6vd-tq-djq" firstAttribute="top" secondItem="HXo-Us-lTU" secondAttribute="bottom" constant="8" id="ptk-lH-Kyg"/>
-                            <constraint firstItem="6vd-tq-djq" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="8" id="rJE-0f-V77"/>
-                            <constraint firstItem="w54-lF-JA4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="yDM-Pr-omC"/>
                             <constraint firstItem="XfP-KY-wkM" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="yo8-TL-2di"/>
-                            <constraint firstItem="6vd-tq-djq" firstAttribute="leading" secondItem="w54-lF-JA4" secondAttribute="trailing" constant="20" id="z4h-MS-Seh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomConstraint" destination="2HV-FH-7NF" id="HGA-7q-J6z"/>
                         <outlet property="collectionView" destination="HXo-Us-lTU" id="ZRU-63-xtz"/>
                         <outlet property="msgTextField" destination="w54-lF-JA4" id="Muc-XR-mmQ"/>
                         <outlet property="sendButton" destination="6vd-tq-djq" id="WWE-1p-zE2"/>
+                        <outlet property="textFieldStackView" destination="wrt-Kq-I8s" id="gqK-W3-nPP"/>
+                        <outlet property="usernameTextField" destination="XfP-KY-wkM" id="1P3-MN-5De"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
