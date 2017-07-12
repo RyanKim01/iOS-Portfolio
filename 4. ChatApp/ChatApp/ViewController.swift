@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldStackView: UIStackView!
 
-    let socket = Socket(domainAndPort: "afternoon-sands-51684.herokuapp.com", path: "socket", transport: "websocket", prot: "https", params: [:])
+    let socket = Socket(domainAndPort: "afternoon-sands-51684.herokuapp.com", path: "socket", transport: "websocket", prot: "https", params: ["user":"ryankim"])
     var topic: String? = "lobby"
-    var messages: [UserMessage] = [UserMessage(body: "Lorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: false), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: true), UserMessage(body: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum", isSender: true)]
+    var messages: [UserMessage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,18 +60,19 @@ class ViewController: UIViewController {
             //                self.chatWindow.text = "You joined the room.\n"
             //            }
             
+            
             chan.on(event: "new_message") { message in
                 guard let convertedMessage = message as? Message,
                     let username = convertedMessage["name"],
                     let body     = convertedMessage["message"] else {
                         return
                 }
-                
-                let newMessage = "[\(username)]:\n \(body)"
-                self.messages.append(UserMessage(body: "\(newMessage)", isSender: false))
-                self.collectionView.reloadData()
-                self.scrollCollectionViewToBottom()
-                
+                if username as? String != self.usernameTextField.text {
+                    let newMessage = "[\(username)]:\n \(body)"
+                    self.messages.append(UserMessage(body: "\(newMessage)", isSender: false))
+                    self.collectionView.reloadData()
+                    self.scrollCollectionViewToBottom()
+                }
             }
             
             //            chan.on(event: "user:entered") { message in
@@ -105,12 +106,12 @@ class ViewController: UIViewController {
 
     @IBAction func sendButtonPressed(_ sender: Any) {
         if let msg = msgTextField.text, let username = usernameTextField.text {
-            let message = Message(message: ["user": username, "body": msg])
+            let message = Message(message: ["name": username, "message": msg])
             let payload = Payload(topic: topic!, event: "new_message", message: message)
             socket.send(data: payload)
             msgTextField.text = ""
             
-            let newMessage = "\(username): \(msg)"
+            let newMessage = "[\(username)]: \(msg)"
             self.messages.append(UserMessage(body: "\(newMessage)", isSender: true))
             self.collectionView.reloadData()
             self.scrollCollectionViewToBottom()
