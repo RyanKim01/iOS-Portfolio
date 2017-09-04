@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2733E9961F5E0AB200E3FADE /* AppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733E9951F5E0AB200E3FADE /* AppCell.swift */; };
 		2740D5AA1F5CC8BD00DA45FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5A91F5CC8BD00DA45FA /* AppDelegate.swift */; };
 		2740D5AC1F5CC8BD00DA45FA /* FeaturedAppsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5AB1F5CC8BD00DA45FA /* FeaturedAppsVC.swift */; };
 		2740D5B21F5CC8BD00DA45FA /* AppStoreDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5B01F5CC8BD00DA45FA /* AppStoreDemo.xcdatamodeld */; };
 		2740D5B41F5CC8BD00DA45FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2740D5B31F5CC8BD00DA45FA /* Assets.xcassets */; };
 		2740D5B71F5CC8BD00DA45FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2740D5B51F5CC8BD00DA45FA /* LaunchScreen.storyboard */; };
 		2740D5C21F5CD1F600DA45FA /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5C11F5CD1F600DA45FA /* CategoryCell.swift */; };
+		2740D5C41F5D0D7700DA45FA /* AppCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5C31F5D0D7700DA45FA /* AppCategory.swift */; };
+		2740D5C61F5D0D9F00DA45FA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5C51F5D0D9F00DA45FA /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2733E9951F5E0AB200E3FADE /* AppCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCell.swift; sourceTree = "<group>"; };
 		2740D5A61F5CC8BD00DA45FA /* AppStoreDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2740D5A91F5CC8BD00DA45FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2740D5AB1F5CC8BD00DA45FA /* FeaturedAppsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAppsVC.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		2740D5B61F5CC8BD00DA45FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2740D5B81F5CC8BD00DA45FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2740D5C11F5CD1F600DA45FA /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		2740D5C31F5D0D7700DA45FA /* AppCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCategory.swift; sourceTree = "<group>"; };
+		2740D5C51F5D0D9F00DA45FA /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,8 @@
 		2740D5BE1F5CD1D800DA45FA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2740D5C31F5D0D7700DA45FA /* AppCategory.swift */,
+				2740D5C51F5D0D9F00DA45FA /* App.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -79,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				2740D5C11F5CD1F600DA45FA /* CategoryCell.swift */,
+				2733E9951F5E0AB200E3FADE /* AppCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -164,7 +173,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2740D5B21F5CC8BD00DA45FA /* AppStoreDemo.xcdatamodeld in Sources */,
+				2733E9961F5E0AB200E3FADE /* AppCell.swift in Sources */,
+				2740D5C41F5D0D7700DA45FA /* AppCategory.swift in Sources */,
 				2740D5AC1F5CC8BD00DA45FA /* FeaturedAppsVC.swift in Sources */,
+				2740D5C61F5D0D9F00DA45FA /* App.swift in Sources */,
 				2740D5AA1F5CC8BD00DA45FA /* AppDelegate.swift in Sources */,
 				2740D5C21F5CD1F600DA45FA /* CategoryCell.swift in Sources */,
 			);
@@ -324,6 +336,7 @@
 				2740D5BD1F5CC8BD00DA45FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
