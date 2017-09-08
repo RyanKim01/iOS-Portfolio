@@ -16,6 +16,8 @@
 		2740D5C21F5CD1F600DA45FA /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5C11F5CD1F600DA45FA /* CategoryCell.swift */; };
 		2740D5C41F5D0D7700DA45FA /* AppCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5C31F5D0D7700DA45FA /* AppCategory.swift */; };
 		2740D5C61F5D0D9F00DA45FA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5C51F5D0D9F00DA45FA /* App.swift */; };
+		2742BEE11F6271B5006BE14E /* LargeCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEE01F6271B5006BE14E /* LargeCategoryCell.swift */; };
+		2742BEE31F627831006BE14E /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742BEE21F627831006BE14E /* Header.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		2740D5C11F5CD1F600DA45FA /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		2740D5C31F5D0D7700DA45FA /* AppCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCategory.swift; sourceTree = "<group>"; };
 		2740D5C51F5D0D9F00DA45FA /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		2742BEE01F6271B5006BE14E /* LargeCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeCategoryCell.swift; sourceTree = "<group>"; };
+		2742BEE21F627831006BE14E /* Header.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 			children = (
 				2740D5C11F5CD1F600DA45FA /* CategoryCell.swift */,
 				2733E9951F5E0AB200E3FADE /* AppCell.swift */,
+				2742BEE01F6271B5006BE14E /* LargeCategoryCell.swift */,
+				2742BEE21F627831006BE14E /* Header.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -173,8 +179,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2740D5B21F5CC8BD00DA45FA /* AppStoreDemo.xcdatamodeld in Sources */,
+				2742BEE31F627831006BE14E /* Header.swift in Sources */,
 				2733E9961F5E0AB200E3FADE /* AppCell.swift in Sources */,
 				2740D5C41F5D0D7700DA45FA /* AppCategory.swift in Sources */,
+				2742BEE11F6271B5006BE14E /* LargeCategoryCell.swift in Sources */,
 				2740D5AC1F5CC8BD00DA45FA /* FeaturedAppsVC.swift in Sources */,
 				2740D5C61F5D0D9F00DA45FA /* App.swift in Sources */,
 				2740D5AA1F5CC8BD00DA45FA /* AppDelegate.swift in Sources */,
