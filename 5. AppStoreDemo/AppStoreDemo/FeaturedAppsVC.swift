@@ -15,12 +15,15 @@ class FeaturedAppsVC: UICollectionViewController, UICollectionViewDelegateFlowLa
     private let headerId = "headerID"
     
     var appCategories: [AppCategory]?
+    var featuredApp: FeaturedApp?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Featured Apps"
         self.collectionView?.backgroundColor = .white
-        AppCategory.fetchFeaturedApps { (appCategories) in
-            self.appCategories = appCategories
+        AppCategory.fetchFeaturedApps { (FeaturedApp) in
+            self.featuredApp = FeaturedApp
+            self.appCategories = FeaturedApp.categories
             self.collectionView?.reloadData()
         }
         
@@ -66,13 +69,13 @@ class FeaturedAppsVC: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 150)
+        return CGSize(width: view.frame.width, height: 120)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! Header
         
-        header.appCategory = appCategories?[0]
+        header.appCategory = featuredApp?.bannerCategory
         
         return header
     }

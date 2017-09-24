@@ -8,12 +8,12 @@
 
 import UIKit
 
-class AppCategory {
+class AppCategory: Decodable {
     var name: String?
     var apps: [App]?
     var type: String?
     
-    static func fetchFeaturedApps(completionHandler: @escaping ([AppCategory]) -> ()) {
+    static func fetchFeaturedApps(completionHandler: @escaping (FeaturedApp) -> ()) {
         let dataURL = "https://api.letsbuildthatapp.com/appstore/featured"
         
         guard let url = URL(string: dataURL) else { return }
@@ -27,43 +27,10 @@ class AppCategory {
             guard let data = data else { return }
             
             do {
-                 let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
-                
-                var appCategories = [AppCategory]()
-                
-                for dict in json["categories"] as! [[String:AnyObject]] {
-                    let appCategory = AppCategory()
-                    appCategory.name = dict["name"] as? String
-                    appCategory.type = dict["type"] as? String
-                    
-                    let appDictionary = dict["apps"] as! [[String: AnyObject]]
-                    var apps = [App]()
-                    
-                    for app in appDictionary {
-                        let indivApp = App()
-                        for item in app {
-                            switch item.key {
-                                case "Category":
-                                    indivApp.category = item.value as? String
-                                case "Id":
-                                    indivApp.id = item.value as? Int
-                                case "Name":
-                                    indivApp.name = item.value as? String
-                                case "Price":
-                                    indivApp.price = item.value as? Float
-                                case "ImageName":
-                                    indivApp.imageName = item.value as? String
-                                default:
-                                print("Not needed")
-                            }
-                        }
-                        apps.append(indivApp)
-                    }
-                    appCategory.apps = apps
-                    appCategories.append(appCategory)
-                }
+                let featuredApp = try JSONDecoder().decode(FeaturedApp.self, from: data)
+
                 DispatchQueue.main.async {
-                    completionHandler(appCategories)
+                    completionHandler(featuredApp)
                 }
                 
             } catch let jsonErr {

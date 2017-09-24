@@ -37,11 +37,15 @@ class Header: CategoryCell {
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: frame.height - 32)
+        return CGSize(width: frame.width/2 + 50, height: frame.height)
     }
     
     private class BannerCell: AppCell {
         override func setupViews() {
+            imageView.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+            imageView.layer.borderWidth = 0.5
+            
+            imageView.layer.cornerRadius = 0
             imageView.translatesAutoresizingMaskIntoConstraints = false
             addSubview(imageView)
             addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0": imageView]))

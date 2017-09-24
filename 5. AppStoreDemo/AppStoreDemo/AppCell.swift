@@ -11,7 +11,7 @@ import UIKit
 class AppCell: UICollectionViewCell {
     var app: App? {
         didSet {
-            if let name = app?.name {
+            if let name = app?.Name {
                 nameLabel.text = name
                 let rectHeight = estimatedHeightOfLabel(text: name)
                 if rectHeight > 20 {
@@ -28,15 +28,15 @@ class AppCell: UICollectionViewCell {
                 
             }
             
-            categoryLabel.text = app?.category
+            categoryLabel.text = app?.Category
             
-            if let price = app?.price {
+            if let price = app?.Price {
                 priceLabel.text = "$\(price)"
             } else {
                 priceLabel.text = ""
             }
             
-            if let imageName = app?.imageName {
+            if let imageName = app?.ImageName {
                 imageView.image = UIImage(named: imageName)
             }
           
@@ -89,7 +89,7 @@ class AppCell: UICollectionViewCell {
         
         let size = CGSize(width: frame.width, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14)]
+        let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
         
         let rectangleHeight = String(text).boundingRect(with: size, options: options, attributes: attributes, context: nil).height
         

@@ -8,10 +8,10 @@
 
 import Foundation
 
-class App {
-    var id: Int?
-    var name: String?
-    var category: String?
-    var price: Float?
-    var imageName: String?
+class App: Decodable {
+    var Id: Int?
+    var Name: String?
+    var Category: String?
+    var Price: Float?
+    var ImageName: String?
 }
