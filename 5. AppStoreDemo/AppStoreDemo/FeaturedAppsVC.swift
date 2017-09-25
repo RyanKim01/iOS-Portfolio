@@ -29,7 +29,6 @@ class FeaturedAppsVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellID)
         collectionView?.register(LargeCategoryCell.self, forCellWithReuseIdentifier: largeCellId)
-        
         collectionView?.register(Header.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
     }
 
@@ -49,13 +48,22 @@ class FeaturedAppsVC: UICollectionViewController, UICollectionViewDelegateFlowLa
         if indexPath.item == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: largeCellId, for: indexPath) as! LargeCategoryCell
             cell.appCategory = appCategories?[indexPath.item]
+            cell.featuredAppsController = self
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CategoryCell
         cell.appCategory = appCategories?[indexPath.item]
+        cell.featuredAppsController = self
         
         return cell
+    }
+
+    func showAppDetailForApp(app: App) {
+        let layout = UICollectionViewFlowLayout()
+        let appDetailController = AppDetailVC(collectionViewLayout: layout)
+        appDetailController.app = app
+        navigationController?.pushViewController(appDetailController, animated: true)
     }
     
     //flow layout delegate

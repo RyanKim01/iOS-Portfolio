@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		271EEF671F770B3F00156558 /* FeaturedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271EEF661F770B3F00156558 /* FeaturedApp.swift */; };
+		271EEF691F7849DF00156558 /* AppDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271EEF681F7849DF00156558 /* AppDetailVC.swift */; };
 		2733E9961F5E0AB200E3FADE /* AppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733E9951F5E0AB200E3FADE /* AppCell.swift */; };
 		2740D5AA1F5CC8BD00DA45FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5A91F5CC8BD00DA45FA /* AppDelegate.swift */; };
 		2740D5AC1F5CC8BD00DA45FA /* FeaturedAppsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2740D5AB1F5CC8BD00DA45FA /* FeaturedAppsVC.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		271EEF661F770B3F00156558 /* FeaturedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedApp.swift; sourceTree = "<group>"; };
+		271EEF681F7849DF00156558 /* AppDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailVC.swift; sourceTree = "<group>"; };
 		2733E9951F5E0AB200E3FADE /* AppCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCell.swift; sourceTree = "<group>"; };
 		2740D5A61F5CC8BD00DA45FA /* AppStoreDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2740D5A91F5CC8BD00DA45FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				2740D5AB1F5CC8BD00DA45FA /* FeaturedAppsVC.swift */,
+				271EEF681F7849DF00156558 /* AppDetailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				2740D5C41F5D0D7700DA45FA /* AppCategory.swift in Sources */,
 				2742BEE11F6271B5006BE14E /* LargeCategoryCell.swift in Sources */,
 				271EEF671F770B3F00156558 /* FeaturedApp.swift in Sources */,
+				271EEF691F7849DF00156558 /* AppDetailVC.swift in Sources */,
 				2740D5AC1F5CC8BD00DA45FA /* FeaturedAppsVC.swift in Sources */,
 				2740D5C61F5D0D9F00DA45FA /* App.swift in Sources */,
 				2740D5AA1F5CC8BD00DA45FA /* AppDelegate.swift in Sources */,
